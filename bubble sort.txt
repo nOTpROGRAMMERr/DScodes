@@ -1,0 +1,31 @@
+//bubble sort
+#include<stdio.h>
+int main()
+{
+    int arr[10]={8,5,21,80,9};
+    int i,j,temp,flag;
+    int n=5;
+    for(i=0;i<n;i++)
+    {
+        int flag=0;
+        for(j=0;j<n-i-1;j++)
+        {
+            if(arr[j]>arr[j+1])
+            {
+            temp=arr[j];
+            arr[j]=arr[j+1];
+            arr[j+1]=temp;
+            flag=1;
+            }
+        }
+        if(flag==0)
+        {
+            printf("the sorted list is :");
+            break;
+        }
+    }
+    for(i=0;i<n;i++)
+    {
+        printf(" %d ",arr[i]);
+    }
+}

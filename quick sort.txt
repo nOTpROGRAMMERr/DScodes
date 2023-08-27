@@ -1,0 +1,48 @@
+//quick sort
+#include<stdio.h>
+int qs(int arr[100],int first,int last)
+{
+ int i,pivot,temp,j;
+if(first<last)
+{
+    
+    i=first;
+    j=last;
+    pivot=first;
+    while(i<j)
+    {
+        while(arr[i]<=arr[pivot] && i<last)
+        i++;
+        while(arr[j]>arr[pivot])
+        j--;
+        if(i<j)
+        {
+            temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+        }
+    }
+        temp=arr[pivot];
+        arr[pivot]=arr[j];
+        arr[j]=temp;
+    qs(arr,first,j-1);
+    qs(arr,j+1,last);
+}
+}
+int main()
+{
+    int n,arr[100],i;
+    printf("size:");
+    scanf("%d",&n);
+    for(i=0;i<n;i++)
+    {
+        scanf("%d",&arr[i]);
+    }
+     int first=0;
+     int last=n-1;
+    qs(arr,first,last);
+    for(i=0;i<n;i++)
+    {
+        printf("%d",arr[i]);
+    }
+}
