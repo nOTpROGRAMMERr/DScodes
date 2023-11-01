@@ -1,0 +1,90 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    char data;
+    struct node *next;
+};
+
+struct node *head = NULL;
+
+void l1(char newdata) {
+    struct node *temp, *right;
+    temp = (struct node *)malloc(sizeof(struct node));
+    temp->data = newdata;
+    temp->next = NULL;
+
+    if (head == NULL) {
+        head = temp;
+        return;
+    }
+
+    right = head;
+    while (right->next != NULL)
+        right = right->next;
+    right->next = temp;
+}
+		
+void sort() {
+    int swapped;
+    struct node *ptr1;
+    struct node *lptr = NULL;
+
+    if (head == NULL)
+        return;
+
+    do {
+        swapped = 0;
+        ptr1 = head;
+
+        while (ptr1->next != lptr) {
+            if (ptr1->data > ptr1->next->data) {
+                char temp = ptr1->data;
+                ptr1->data = ptr1->next->data;
+                ptr1->next->data = temp;
+                swapped = 1;
+            }
+            ptr1 = ptr1->next;
+        }
+        lptr = ptr1;
+    } while (swapped);
+}
+
+void display() {
+    struct node *r = head;
+    if (r == NULL) {
+        printf("List is empty.\n");
+        return;
+    }
+
+    printf("Linked List: ");
+    while (r != NULL) {
+        printf("%c ", r->data);
+        r = r->next;
+    }
+    printf("\n");
+}
+
+int main() {
+    char data;
+    int n1, i;
+
+    printf("Enter the length of the string:\n");
+    scanf("%d", &n1);
+    printf("Enter the letters.\n");
+    for (i = 0; i < n1; i++) {
+        printf("Enter the char to insert: ");
+        scanf(" %c", &data);
+        l1(data);
+    }
+
+    printf("Original List:\n");
+    display();
+
+    sort();
+    printf("Sorted List:\n");
+    display();
+
+    return 0;
+}
+
