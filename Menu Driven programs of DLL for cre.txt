@@ -1,6 +1,15 @@
 //Menu Driven programs of DLL for creation,deletion,insertion & display
 #include<stdio.h>
 #include<stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+    struct node *prev;
+};
+struct node *head=NULL;
+
 void create();
 void display();
 void insertbeg();
@@ -77,13 +86,7 @@ int main()
         }
     }
 }
-struct node
-{
-    int data;
-    struct node *next;
-    struct node *prev;
-};
-struct node *head=NULL;
+
 void create()
 {
     struct node *temp,*ptr;
@@ -123,30 +126,30 @@ void display()
 }
 void insertbeg()
 {
-    struct node *new,*temp;
-    new=(struct node*)malloc(sizeof(struct node));
+    struct node *newl,*temp;
+    newl=(struct node*)malloc(sizeof(struct node));
     printf("enter the data:");
-    scanf("%d",&new->data);
+    scanf("%d",&newl->data);
     if(head==NULL)
     {
-        head=new;
+        head=newl;
     }
     else
     {
-       new->next=head;
-       head->prev=new;
-       head=new;
+       newl->next=head;
+       head->prev=newl;
+       head=newl;
     }
 }
 void insertlast()
 {
-    struct node *temp,*new;
-    new=(struct node*)malloc(sizeof(struct node));
+    struct node *temp,*newl;
+    newl=(struct node*)malloc(sizeof(struct node));
     printf("enter the data:");
-    scanf("%d",&new->data);
+    scanf("%d",&newl->data);
     if(head==NULL)
     {
-        head=new;
+        head=newl;
     }
     else
     {
@@ -155,22 +158,22 @@ void insertlast()
         {
             temp=temp->next;
         }
-        temp->next=new;
-        new->next=NULL;
+        temp->next=newl;
+        newl->next=NULL;
     }
 }
 void insertanypos()
 {
-    struct node *temp,*new,*ptr,*prev_ptr;
+    struct node *temp,*newl,*ptr,*prev_ptr;
     int pos,i;
     printf("enter the position:");
     scanf("%d",&pos);
-    new=(struct node*)malloc(sizeof(struct node));
+    newl=(struct node*)malloc(sizeof(struct node));
     printf("enter the data:");
-    scanf("%d",&new->data);
+    scanf("%d",&newl->data);
     if(head==NULL)
     {
-        head=new;
+        head=newl;
     }
     else
     {
@@ -180,10 +183,10 @@ void insertanypos()
         prev_ptr=ptr;
         ptr=ptr->next;
     }
-    prev_ptr->next=new;
-    new->next=ptr;
-    ptr->prev=new;
-    new->prev=prev_ptr;
+    prev_ptr->next=newl;
+    newl->next=ptr;
+    ptr->prev=newl;
+    newl->prev=prev_ptr;
     }
 }
 void deletebeg()
@@ -242,60 +245,4 @@ void deleteend()
         temp=ptr;
         ptr->next=NULL;
     }
-}
-#include<stdio.h>
-#include<stdlib.h>
-
-struct node {
-    int data;
-    struct node *next;
-    struct node *prev;
-};
-//reverse 
-struct node *head = NULL; 
-void reversed()
-{
-    struct node *ptr; 
-    ptr=head;
-    while(ptr->next!=NULL)
-    {
-        ptr=ptr->next;
-    }
-    while(ptr->prev!=NULL)
-    {
-        printf("%d->",ptr->data);
-       ptr= ptr->prev;
-    }
- printf("%d\n",ptr->data);
-}
-void display()
-{
-    struct node *ptr=head;
-    while(ptr->next!=NULL)
-    {
-        printf("%d->",ptr->data);
-        ptr=ptr->next;
-    }
-    printf("%d\n",ptr->data);
-}
-int main()
-{
-    struct node *f,*s,*t;
-    f=(struct node*)malloc(sizeof(struct node));
-    s=(struct node*)malloc(sizeof(struct node));
-    t=(struct node*)malloc(sizeof(struct node));
-    head=f;
-    f->data=9;
-    s->data=8;
-    t->data=7;
-    f->next=s;
-    s->next=t;
-    t->next=NULL;
-    f->prev=NULL;
-    s->prev=f;
-    t->prev=s;
-    printf("List is:");
-    display();
-    printf("reversed list is:");
-    reversed(); 
 }
